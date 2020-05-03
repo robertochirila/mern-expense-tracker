@@ -10,21 +10,23 @@ export class ExpensesForm extends Component {
         this.state = {
             expenseName: "",
             expenseCategory: "",
+            expensePrice: "",
             showList: false
         }
     }
 
     onSubmit = (e) => {
         e.preventDefault()
-        const { expenseName, expenseCategory } = this.state
+        const { expenseName, expenseCategory, expensePrice } = this.state
         const expense = {
             name: expenseName,
-            category: expenseCategory
+            category: expenseCategory,
+            price: expensePrice
         }
         axios.post('http://localhost:5000/expenses/add', expense)
             .then(res => console.log(res.data))
 
-        this.setState({ expenseName: "", expenseCategory: "" })
+        this.setState({ expenseName: "", expenseCategory: "", expensePrice: "" })
     }
 
     handleChange = input => e => {
@@ -41,13 +43,17 @@ export class ExpensesForm extends Component {
         this.setState({ showList: false })
     }
     render() {
-        const { expenseName, expenseCategory, showList } = this.state
+        const { expenseName, expenseCategory, expensePrice, showList } = this.state
         return (
             <div>
                 <Form onSubmit={this.onSubmit}>
                     <FormGroup>
                         <Label for="expenseName">Expense Name :</Label>
                         <Input type="text" name="expense_name" id="expenseName" placeholder="Expense Name" onChange={this.handleChange('expenseName')} value={expenseName} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="expensePrice">Expense Price :</Label>
+                        <Input type="text" name="expense_price" id="expensePrice" placeholder="Expense Price" onChange={this.handleChange('expensePrice')} value={expensePrice} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="expenseCategory">Select Category :</Label>

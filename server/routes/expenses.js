@@ -11,13 +11,15 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const name = req.body.name
     const category = req.body.category
+    const price = req.body.price
     //const date = Date.parse(req.body.date)
 
     const newExpense = new Expenses({
         name,
-        category
+        category,
+        price
     })
-    console.log(newExpense)
+
 
     newExpense.save()
         .then(() => res.json('Expense added succesfully'))

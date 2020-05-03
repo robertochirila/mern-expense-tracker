@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { Expense } from './Expense'
+import { ListGroup, ListGroupItem } from 'reactstrap';
+
 
 export class ExpensesList extends Component {
     constructor(props) {
@@ -7,11 +11,25 @@ export class ExpensesList extends Component {
             expensesList: []
         }
     }
+    componentDidMount() {
+        axios.get('http://localhost:5000/expenses/')
+            .then(response => {
+                this.setState({ expensesList: response.data });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
     render() {
+        const { expensesList } = this.state
         return (
-            <div>
-
-            </div>
+            <ListGroup>
+                {expensesList.map((currentExpense) =>
+                    <ListGroupItem key={currentExpense._id}>
+                        <Expense expense={currentExpense} />
+                    </ListGroupItem>
+                )}
+            </ListGroup>
         )
     }
 }
