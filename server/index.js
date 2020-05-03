@@ -10,7 +10,6 @@ const port = process.env.PORT || 5000
 app.use(cors())
 
 const uri = process.env.ATLAS_URI
-console.log(uri)
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
@@ -19,6 +18,11 @@ connection.once('open', () => {
 })
 
 app.use(express.json())
+
+
+const expensesRouter = require('./routes/expenses')
+
+app.use('/expenses', expensesRouter)
 
 
 
