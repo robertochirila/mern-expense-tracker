@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { ExpensesList } from './ExpensesList'
 import axios from 'axios'
-import { Container, Row, Col } from 'reactstrap';
+import { Container } from 'reactstrap';
+import {
+    isMobile
+} from "react-device-detect";
 
 
 export class ExpensesForm extends Component {
@@ -49,12 +52,30 @@ export class ExpensesForm extends Component {
             marginBottom: '1rem',
             float: 'left'
         }
+        const buttonListStyleMobile = {
+            width: '90%',
+            marginTop: '2rem',
+            marginBottom: '1rem'
+        }
 
         const buttonHideStyle = {
             float: 'left',
             marginLeft: '1rem',
             marginTop: '2rem'
         }
+        const buttonHideStyleMobile = {
+            marginLeft: '0',
+            marginTop: '2rem',
+            width: '80%'
+        }
+
+        const buttonSubmitStyle = {}
+
+        const buttonSubmitStyleMobile = {
+            width: '90%'
+        }
+
+
 
         const { expenseName, expenseCategory, expensePrice, showList } = this.state
         return (
@@ -62,7 +83,7 @@ export class ExpensesForm extends Component {
                 {showList === false ?
                     <React.Fragment>
                         <React.Fragment>
-                            <Button style={buttonListStyle} outline color="primary" onClick={this.showList}>Show Expenses List</Button>
+                            <Button style={isMobile ? buttonListStyleMobile : buttonListStyle} color="primary" onClick={this.showList}>Show Expenses List</Button>
                         </React.Fragment>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
@@ -80,12 +101,12 @@ export class ExpensesForm extends Component {
                                     <option>Transport</option>
                                 </Input>
                             </FormGroup>
-                            <Button outline color="primary">Submit</Button>
+                            <Button style={isMobile ? buttonSubmitStyleMobile : buttonSubmitStyle} color="primary">Submit</Button>
                         </Form>
                     </React.Fragment>
                     :
                     <React.Fragment>
-                        <Button style={buttonHideStyle} outline color="warning" onClick={this.hideList}>Hide List</Button>
+                        <Button style={isMobile ? buttonHideStyleMobile : buttonHideStyle} color="warning" onClick={this.hideList}>Hide List</Button>
                         <ExpensesList />
                     </React.Fragment>
                 }

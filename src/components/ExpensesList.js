@@ -3,6 +3,9 @@ import axios from 'axios'
 import { Expense } from './Expense'
 import { Button, ListGroup, ListGroupItem } from 'reactstrap'
 import { Container, Row, Col } from 'reactstrap';
+import {
+    isMobile
+} from "react-device-detect";
 
 
 export class ExpensesList extends Component {
@@ -51,6 +54,10 @@ export class ExpensesList extends Component {
             clear: 'both',
             marginTop: '1rem'
         }
+        const calculateButtonStyleMobile = {
+            width: '88%',
+            marginTop: '1rem'
+        }
 
         const totalCostStyle = {
             float: 'left',
@@ -58,10 +65,18 @@ export class ExpensesList extends Component {
             marginTop: '1rem'
         }
 
+        const listGroupItemStyle = {
+            paddingTop: '2rem'
+        }
+
+        const listGroupItemStyleMobile = {
+            paddingTop: '2rem',
+            width: '100%'
+        }
+
         return (
             <Container>
-
-                <Button style={calculateButtonStyle} outline color="success" onClick={this.calculateCost}>Calculate Total</Button>
+                <Button style={isMobile ? calculateButtonStyleMobile : calculateButtonStyle} color="success" onClick={this.calculateCost}>Calculate</Button>
                 {displayTotal === true ?
                     <h3 style={totalCostStyle}>Total Cost: {totalCost}</h3>
                     :
@@ -69,10 +84,10 @@ export class ExpensesList extends Component {
                     </React.Fragment>
                 }
                 <Container style={{ clear: 'both' }}>
-                    <ListGroup style={{ paddingTop: '2rem' }}>
+                    <ListGroup style={{ marginTop: '2rem' }}>
                         <Row>
                             {expensesList.map((currentExpense) =>
-                                <ListGroupItem key={currentExpense._id}>
+                                <ListGroupItem style={isMobile ? listGroupItemStyleMobile : listGroupItemStyle} key={currentExpense._id}>
                                     <Expense expense={currentExpense} deleteExpense={this.deleteExpense} />
                                 </ListGroupItem>
                             )}
