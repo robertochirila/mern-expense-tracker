@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Expense } from './Expense'
-import { Button, ListGroup, ListGroupItem } from 'reactstrap'
+import { Button, ListGroup, ListGroupItem, Fade } from 'reactstrap'
 import { Container, Row, Col } from 'reactstrap';
 import {
     isMobile
@@ -75,27 +75,36 @@ export class ExpensesList extends Component {
         }
 
         return (
+
             <Container>
-                <Button style={isMobile ? calculateButtonStyleMobile : calculateButtonStyle} color="success" onClick={this.calculateCost}>Calculate</Button>
+                <Fade timeout={1000}>
+                    <Button style={isMobile ? calculateButtonStyleMobile : calculateButtonStyle} color="success" onClick={this.calculateCost}>Calculate</Button>
+                </Fade>
                 {displayTotal === true ?
-                    <h3 style={totalCostStyle}>Total Cost: {totalCost}</h3>
+                    <Fade>
+                        <h3 style={totalCostStyle}>Total Cost: {totalCost}</h3>
+                    </Fade>
                     :
                     <React.Fragment>
                     </React.Fragment>
                 }
-                <Container style={{ clear: 'both' }}>
-                    <ListGroup style={{ marginTop: '2rem' }}>
-                        <Row>
-                            {expensesList.map((currentExpense) =>
-                                <ListGroupItem style={isMobile ? listGroupItemStyleMobile : listGroupItemStyle} key={currentExpense._id}>
-                                    <Expense expense={currentExpense} deleteExpense={this.deleteExpense} />
-                                </ListGroupItem>
-                            )}
-                        </Row>
-                    </ListGroup>
-                </Container>
-
+                <Fade timeout={1500}>
+                    <Container style={{ clear: 'both' }}>
+                        <ListGroup style={{ paddingTop: '2rem' }}>
+                            <Row>
+                                {expensesList.map((currentExpense) =>
+                                    <Col key={currentExpense._id}>
+                                        <ListGroupItem style={isMobile ? listGroupItemStyleMobile : listGroupItemStyle} key={currentExpense._id}>
+                                            <Expense expense={currentExpense} deleteExpense={this.deleteExpense} />
+                                        </ListGroupItem>
+                                    </Col>
+                                )}
+                            </Row>
+                        </ListGroup>
+                    </Container>
+                </Fade>
             </Container>
+
         )
     }
 }

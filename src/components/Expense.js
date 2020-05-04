@@ -19,17 +19,15 @@ export class Expense extends Component {
     render() {
         const { expense } = this.props
         return (
-            <Col>
-                <Card>
-                    <CardImg top width="100%" src="/assets/318x180.svg" alt="Card image cap" />
-                    <CardBody>
-                        <CardTitle><h6>{expense.name}</h6></CardTitle>
-                        <CardSubtitle><h6>{expense.category}</h6></CardSubtitle>
-                        <CardText>Price: {expense.price}</CardText>
-                        <Button color="danger" onClick={this.delete}>Delete</Button>
-                    </CardBody>
-                </Card>
-            </Col>
+            <Card>
+                <CardImg top width="100%" src="/assets/318x180.svg" alt="Card image cap" />
+                <CardBody>
+                    <CardTitle><h6>{expense.name}</h6></CardTitle>
+                    <CardSubtitle><h6>{expense.category}</h6></CardSubtitle>
+                    <CardText>Price: {expense.price}</CardText>
+                    <Button color="danger" onClick={this.delete}>Delete</Button>
+                </CardBody>
+            </Card>
 
 
         )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Fade } from 'reactstrap';
 import { ExpensesList } from './ExpensesList'
 import axios from 'axios'
 import { Container } from 'reactstrap';
@@ -79,34 +79,43 @@ export class ExpensesForm extends Component {
 
         const { expenseName, expenseCategory, expensePrice, showList } = this.state
         return (
+
             <Container>
                 {showList === false ?
                     <React.Fragment>
                         <React.Fragment>
-                            <Button style={isMobile ? buttonListStyleMobile : buttonListStyle} color="primary" onClick={this.showList}>Show Expenses List</Button>
+                            <Fade timeout={1000}>
+                                <Button style={isMobile ? buttonListStyleMobile : buttonListStyle} color="primary" onClick={this.showList}>Show Expenses List</Button>
+                            </Fade>
                         </React.Fragment>
-                        <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Input type="text" name="expense_name" id="expenseName" placeholder="Expense Name" onChange={this.handleChange('expenseName')} value={expenseName} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Input type="text" name="expense_price" id="expensePrice" placeholder="Expense Price" onChange={this.handleChange('expensePrice')} value={expensePrice} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Input type="select" name="select" id="expenseCategory" onChange={this.handleChange('expenseCategory')} value={expenseCategory}>
-                                    <option>Leisure</option>
-                                    <option>Health</option>
-                                    <option>Work</option>
-                                    <option>Essentials</option>
-                                    <option>Transport</option>
-                                </Input>
-                            </FormGroup>
-                            <Button style={isMobile ? buttonSubmitStyleMobile : buttonSubmitStyle} color="primary">Submit</Button>
-                        </Form>
+                        <Fade timeout={1500}>
+                            <Form onSubmit={this.onSubmit}>
+                                <FormGroup>
+                                    <Input type="text" name="expense_name" id="expenseName" placeholder="Expense Name" onChange={this.handleChange('expenseName')} value={expenseName} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Input type="text" name="expense_price" id="expensePrice" placeholder="Expense Price" onChange={this.handleChange('expensePrice')} value={expensePrice} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Input type="select" name="select" id="expenseCategory" onChange={this.handleChange('expenseCategory')} value={expenseCategory}>
+                                        <option>Leisure</option>
+                                        <option>Health</option>
+                                        <option>Work</option>
+                                        <option>Essentials</option>
+                                        <option>Transport</option>
+                                    </Input>
+                                </FormGroup>
+                                <Fade timeout={2000}>
+                                    <Button style={isMobile ? buttonSubmitStyleMobile : buttonSubmitStyle} color="primary">Submit</Button>
+                                </Fade>
+                            </Form>
+                        </Fade>
                     </React.Fragment>
                     :
                     <React.Fragment>
-                        <Button style={isMobile ? buttonHideStyleMobile : buttonHideStyle} color="warning" onClick={this.hideList}>Hide List</Button>
+                        <Fade timeout={500}>
+                            <Button style={isMobile ? buttonHideStyleMobile : buttonHideStyle} color="warning" onClick={this.hideList}>Hide List</Button>
+                        </Fade>
                         <ExpensesList />
                     </React.Fragment>
                 }
