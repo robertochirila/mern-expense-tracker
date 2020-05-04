@@ -9,6 +9,11 @@ export class Expense extends Component {
         super(props)
     }
 
+    delete = () => {
+        const { expense } = this.props
+        this.props.deleteExpense(expense._id)
+    }
+
     render() {
         const { expense } = this.props
         return (
@@ -19,7 +24,7 @@ export class Expense extends Component {
                         <CardTitle>{expense.name}</CardTitle>
                         <CardSubtitle>{expense.category}</CardSubtitle>
                         <CardText>Price: {expense.price}</CardText>
-                        <Button>Button</Button>
+                        <Button onClick={this.delete}>Delete</Button>
                     </CardBody>
                 </Card>
             </React.Fragment>

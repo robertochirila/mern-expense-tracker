@@ -12,7 +12,6 @@ router.route('/add').post((req, res) => {
     const name = req.body.name
     const category = req.body.category
     const price = req.body.price
-    //const date = Date.parse(req.body.date)
 
     const newExpense = new Expenses({
         name,
@@ -26,5 +25,11 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ', +err))
 
 })
+
+router.route('/:id').delete((req, res) => {
+    Expenses.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Exercise deleted.'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router
