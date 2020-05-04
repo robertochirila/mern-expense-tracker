@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { ExpensesList } from './ExpensesList'
 import axios from 'axios'
+import { Container, Row, Col } from 'reactstrap';
 
 
 export class ExpensesForm extends Component {
@@ -43,25 +44,34 @@ export class ExpensesForm extends Component {
         this.setState({ showList: false })
     }
     render() {
+        const buttonListStyle = {
+            marginTop: '2rem',
+            marginBottom: '1rem',
+            float: 'left'
+        }
+
+        const buttonHideStyle = {
+            float: 'left',
+            marginLeft: '1rem',
+            marginTop: '2rem'
+        }
+
         const { expenseName, expenseCategory, expensePrice, showList } = this.state
         return (
-            <div>
+            <Container>
                 {showList === false ?
                     <React.Fragment>
                         <React.Fragment>
-                            <Button onClick={this.showList}>Show List</Button>
+                            <Button style={buttonListStyle} outline color="primary" onClick={this.showList}>Show Expenses List</Button>
                         </React.Fragment>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="expenseName">Expense Name :</Label>
                                 <Input type="text" name="expense_name" id="expenseName" placeholder="Expense Name" onChange={this.handleChange('expenseName')} value={expenseName} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="expensePrice">Expense Price :</Label>
                                 <Input type="text" name="expense_price" id="expensePrice" placeholder="Expense Price" onChange={this.handleChange('expensePrice')} value={expensePrice} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="expenseCategory">Select Category :</Label>
                                 <Input type="select" name="select" id="expenseCategory" onChange={this.handleChange('expenseCategory')} value={expenseCategory}>
                                     <option>Leisure</option>
                                     <option>Health</option>
@@ -70,16 +80,16 @@ export class ExpensesForm extends Component {
                                     <option>Transport</option>
                                 </Input>
                             </FormGroup>
-                            <Button>Submit</Button>
+                            <Button outline color="primary">Submit</Button>
                         </Form>
                     </React.Fragment>
                     :
                     <React.Fragment>
-                        <Button onClick={this.hideList}>Hide List</Button>
+                        <Button style={buttonHideStyle} outline color="warning" onClick={this.hideList}>Hide List</Button>
                         <ExpensesList />
                     </React.Fragment>
                 }
-            </div>
+            </Container>
         )
     }
 }
