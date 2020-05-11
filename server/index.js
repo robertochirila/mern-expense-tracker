@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const config = require('./config/default.json')
 
 require('dotenv').config()
 
@@ -21,8 +22,11 @@ app.use(express.json())
 
 
 const expensesRouter = require('./routes/expenses')
+const usersRouter = require('./routes/users')
+
 
 app.use('/expenses', expensesRouter)
+app.use('/users', usersRouter)
 
 
 

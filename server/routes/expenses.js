@@ -2,7 +2,7 @@ const router = require('express').Router()
 let Expenses = require('../models/Expenses')
 
 
-router.route('/').get((req, res) => {
+router.route('/').post((req, res) => {
     Expenses.find()
         .then(expenses => res.json(expenses))
         .catch(err => res.status(400).json('Error: ' + err))
