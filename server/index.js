@@ -23,10 +23,12 @@ app.use(express.json())
 
 const expensesRouter = require('./routes/expenses')
 const usersRouter = require('./routes/users')
+const authRouter = require('./routes/auth')
 
 
 app.use('/expenses', expensesRouter)
 app.use('/users', usersRouter)
+app.use('/auth', authRouter)
 
 
 

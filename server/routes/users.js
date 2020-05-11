@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 
 
 
+
 router.route('/').post((req, res) => {
     const { name, email, password } = req.body
 
@@ -53,6 +54,7 @@ router.route('/').post((req, res) => {
             })
         })
 })
+
 
 
 
